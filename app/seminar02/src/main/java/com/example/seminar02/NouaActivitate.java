@@ -1,5 +1,7 @@
 package com.example.seminar02;
 
+import static android.os.Build.VERSION_CODES_FULL.R;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;

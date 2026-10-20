@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Adauga banca!"
+        />
+
+    <EditText
+        android:id="@+id/culoare_et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/exemplu_maro"/>
+
+    <EditText
+        android:id="@+id/numarLocuri_et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/exemplu_5"/>
+
+    <EditText
+        android:id="@+id/zona_et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/exemplu_centru"/>
+
+    <Spinner
+        android:id="@+id/nrPicioare_sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/numar"
+        />
+
+    <RatingBar
+        android:id="@+id/confort_RB"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/este_conf"/>
+
+    <CheckBox
+        android:id="@+id/esteOcupata_CB"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Este ocupata?"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="AdaugaBanca"
+        android:text="@string/apasa" />
+</LinearLayout>

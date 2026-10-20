@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">laborator04-flux</string>
+    <string name="exemplu_bancaSubCopac">bancaSubCopc\n</string>
+    <string name="apasa">apasa</string>
+    <string name="exemplu_5">5\n</string>
+    <string name="exemplu_centru">In centru\n</string>
+    <string name="exemplu_maro">Maro\n</string>
+    <string name="este_conf">Cat de confortabila este?</string>
+    <string-array name="numar">
+         <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+    </string-array>
+
+
+</resources>
