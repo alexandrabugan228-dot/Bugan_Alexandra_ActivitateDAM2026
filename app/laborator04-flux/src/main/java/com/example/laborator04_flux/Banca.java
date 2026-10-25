@@ -43,3 +43,4 @@ public class Banca implements Serializable {
                 '}';
     }
 }
+

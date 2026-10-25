@@ -1,10 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".adaugaBanca">
+    android:layout_height="match_parent">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Adaugă bancă"
+            android:textSize="22sp" />
+        <EditText
+            android:id="@+id/culoare_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Culoare"
+            android:inputType="text" />
+
+        <EditText
+            android:id="@+id/numarLocuri_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Număr locuri"
+            android:inputType="number" />
+
+        <Spinner
+            android:id="@+id/zona_sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:entries="@array/zone" />
+        <RadioGroup
+            android:id="@+id/rgPicioare"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <RadioButton
+                android:id="@+id/rb2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="2 picioare" />
+            <RadioButton
+                android:id="@+id/rb4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="4 picioare" />
+        </RadioGroup>
+        <CheckBox
+            android:id="@+id/esteOcupata_CB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Este ocupată?" />
+
+        <Switch
+            android:id="@+id/confort_sw"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Este confortabilă " />
+
+        <RatingBar
+            android:id="@+id/confort_RB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:numStars="5"
+            android:stepSize="0.5" />
+        <Button
+            android:id="@+id/btnSalveaza"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Salvează" />
+    </LinearLayout>
+</ScrollView>

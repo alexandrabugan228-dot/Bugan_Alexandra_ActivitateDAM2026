@@ -1,19 +1,33 @@
 package com.example.laborator04_flux;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.RatingBar;
-import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
+
+    private TextView tvRezultat;
+
+    private final ActivityResultLauncher<Intent> launcher =
+            registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+                if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+                    Banca b = (Banca) result.getData().getSerializableExtra("banca");
+                    if (b != null) {
+                        tvRezultat.setText(b.toString());
+                        Toast.makeText(this, "Banca adăugată: " + b.getCuloare(),
+                                Toast.LENGTH_LONG).show();
+                    }
+                }
+            });
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,19 +39,16 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-    }
-    public void AdaugaBanca(View view)
-    {
-        EditText et=findViewById(R.id.culoare_et);
-        CheckBox cb=findViewById(R.id.esteOcupata_CB);
-        EditText et2=findViewById(R.id.numarLocuri_et);
-        EditText et3=findViewById(R.id.zona_et);
-        Spinner sp=findViewById(R.id.nrPicioare_sp);
-        RatingBar rb=findViewById(R.id.confort_RB);
 
-        String cloare=et.getText().toString();
-        Boolean esteOcupata=cb.isChecked();
-        Integer numar=et2.getText().
+        tvRezultat = findViewById(R.id.tvRezultat);
+
+        findViewById(R.id.btnAdauga).setOnClickListener(v ->
+                launcher.launch(new Intent(this, AdaugaBanca.class)));
+
+        findViewById(R.id.btnAdaugaAI).setOnClickListener(v ->
+                launcher.launch(new Intent(this, AdaugaBancaAI.class)));
 
     }
+
+
 }

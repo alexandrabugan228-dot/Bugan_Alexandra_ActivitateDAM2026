@@ -19,7 +19,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".adaugaBanca"
+            android:name=".AdaugaBanca"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".AdaugaBancaAI"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
     </application>
