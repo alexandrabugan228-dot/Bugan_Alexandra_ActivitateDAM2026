@@ -2,6 +2,8 @@ package com.example.laborator04_flux;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -13,18 +15,32 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
 
     private TextView tvRezultat;
+    private final ArrayList<Banca> listaBanci = new ArrayList<>();
+
+    private final ActivityResultLauncher<Intent> launcherLista =
+            registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+                if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+                    ArrayList<Banca> modificata =
+                            (ArrayList<Banca>) result.getData().getSerializableExtra("lista");
+                    if (modificata != null) {
+                        listaBanci.clear();
+                        listaBanci.addAll(modificata);
+                    }
+                }
+            });
 
     private final ActivityResultLauncher<Intent> launcher =
             registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
                 if (result.getResultCode() == RESULT_OK && result.getData() != null) {
                     Banca b = (Banca) result.getData().getSerializableExtra("banca");
                     if (b != null) {
+                        listaBanci.add(b);
                         tvRezultat.setText(b.toString());
-                        Toast.makeText(this, "Banca adăugată: " + b.getCuloare(),
-                                Toast.LENGTH_LONG).show();
                     }
                 }
             });
@@ -47,6 +63,23 @@ public class MainActivity extends AppCompatActivity {
 
         findViewById(R.id.btnAdaugaAI).setOnClickListener(v ->
                 launcher.launch(new Intent(this, AdaugaBancaAI.class)));
+
+        Button btn = findViewById(R.id.btnVizualizare);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it = new Intent(getApplicationContext(), AfisareBanci.class);
+                it.putExtra("lista", listaBanci);
+                it.putExtra("lista", listaBanci);
+                launcherLista.launch(it);
+            }
+        });
+
+
+
+
+
+
 
     }
 

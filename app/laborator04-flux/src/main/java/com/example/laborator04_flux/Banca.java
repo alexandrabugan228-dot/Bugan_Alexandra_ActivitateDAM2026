@@ -2,6 +2,7 @@ package com.example.laborator04_flux;
 
 
 import java.io.Serializable;
+import java.util.List;
 
 public class Banca implements Serializable {
 

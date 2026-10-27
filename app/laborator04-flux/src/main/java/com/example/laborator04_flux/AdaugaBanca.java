@@ -7,6 +7,9 @@ import android.widget.*;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class AdaugaBanca extends AppCompatActivity {
 
     @Override
@@ -42,12 +45,14 @@ public class AdaugaBanca extends AppCompatActivity {
 
         Banca b = new Banca(culoare, locuri, esteOcupata, zona, picioare, esteConfortabila);
 
+
         Toast.makeText(this, "rating confort: " + rbConfort.getRating(),
                 Toast.LENGTH_SHORT).show();
 
         Intent rezultat = new Intent();
         Bundle bundle = new Bundle();
         bundle.putSerializable("banca", b);
+
         rezultat.putExtras(bundle);
         setResult(RESULT_OK, rezultat);
         finish();
