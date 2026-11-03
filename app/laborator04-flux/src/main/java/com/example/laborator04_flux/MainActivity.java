@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
     private final ActivityResultLauncher<Intent> launcher =
             registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
                 if (result.getResultCode() == RESULT_OK && result.getData() != null) {
-                    Banca b = (Banca) result.getData().getSerializableExtra("banca");
+                    Banca b = result.getData().getParcelableExtra("banca");
                     if (b != null) {
                         listaBanci.add(b);
                         tvRezultat.setText(b.toString());

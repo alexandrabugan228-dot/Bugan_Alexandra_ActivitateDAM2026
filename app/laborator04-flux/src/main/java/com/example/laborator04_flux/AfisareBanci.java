@@ -2,55 +2,68 @@ package com.example.laborator04_flux;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class AfisareBanci extends AppCompatActivity {
 
-    private ArrayList<Banca> lista;
-    private ArrayAdapter<Banca> adapter;
+    private ArrayList<Banca> lista ;
+    private int idModificat = 0;
+    private BancaAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_afisare_banci);
-        lista = (ArrayList<Banca>) getIntent().getSerializableExtra("lista");
+
+        lista = getIntent().getParcelableArrayListExtra("lista");
         if (lista == null) {
             lista = new ArrayList<>();
         }
+
         ListView lv = findViewById(R.id.lvBanci);
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, lista);
+        adapter = new BancaAdapter(lista, getApplicationContext(), R.layout.rand_banca);
         lv.setAdapter(adapter);
 
-        lv.setOnItemClickListener((parent, view, position, id) -> {
-            Banca b = lista.get(position);
-            Toast.makeText(this, b.toString(), Toast.LENGTH_LONG).show();
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intentModifica = new Intent(getApplicationContext(), AdaugaBanca.class);
+                intentModifica.putExtra("banca", lista.get(i));
+                idModificat = i;
+                startActivityForResult(intentModifica, 209);
+                Toast.makeText(getApplicationContext(), "click " + i, Toast.LENGTH_SHORT).show();
+            }
         });
 
-        lv.setOnItemLongClickListener((parent, view, position, id) -> {
-            lista.remove(position);
-            adapter.notifyDataSetChanged();
-            Toast.makeText(this, "banca stearsa", Toast.LENGTH_SHORT).show();
-            return true;
+        lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                lista.remove(i);
+                adapter.notifyDataSetChanged();
+                Toast.makeText(getApplicationContext(), "Bancă ștearsă", Toast.LENGTH_SHORT).show();
+                return true;
+            }
         });
+    }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            if (requestCode == 209) {
+                lista.set(idModificat, (Banca) data.getParcelableExtra("banca"));
+                adapter.notifyDataSetChanged();
+            }
+        }
     }
-    private void inchide() {
-        Intent rezultat = new Intent();
-        rezultat.putExtra("lista", lista);
-        setResult(RESULT_OK, rezultat);
-        finish();
-    }
+
 
 }

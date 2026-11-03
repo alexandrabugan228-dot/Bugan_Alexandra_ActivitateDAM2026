@@ -47,7 +47,7 @@ public class AdaugaBancaAI extends AppCompatActivity {
 
         Intent rezultat = new Intent();
         Bundle bundle = new Bundle();
-        bundle.putSerializable("banca", b);
+        bundle.putParcelable("banca", b);
         rezultat.putExtras(bundle);
         setResult(RESULT_OK, rezultat);
         finish();

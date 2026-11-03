@@ -18,6 +18,30 @@ public class AdaugaBanca extends AppCompatActivity {
         setContentView(R.layout.activity_adauga_banca);
 
         findViewById(R.id.btnSalveaza).setOnClickListener(this::adaugaBanca);
+        Intent it = getIntent();
+        if (it.hasExtra("banca")) {
+            Banca b = it.getParcelableExtra("banca");
+
+            EditText etCuloare = findViewById(R.id.culoare_et);
+            EditText etLocuri = findViewById(R.id.numarLocuri_et);
+            Spinner spZona = findViewById(R.id.zona_sp);
+            RadioGroup rgPicioare = findViewById(R.id.rgPicioare);
+            CheckBox cbOcupata = findViewById(R.id.esteOcupata_CB);
+            Switch swConfort = findViewById(R.id.confort_sw);
+
+            etCuloare.setText(b.getCuloare());
+            etLocuri.setText(String.valueOf(b.getLocuri()));
+            cbOcupata.setChecked(b.isEsteOcupata());
+            swConfort.setChecked(b.isEsteConfortabila());
+            rgPicioare.check(b.getNrPicioare() == 2 ? R.id.rb2 : R.id.rb4);
+
+            for (int i = 0; i < spZona.getCount(); i++) {
+                if (spZona.getItemAtPosition(i).toString().equals(b.getZona())) {
+                    spZona.setSelection(i);
+                    break;
+                }
+            }
+        }
     }
 
     private void adaugaBanca(View view) {
@@ -51,7 +75,7 @@ public class AdaugaBanca extends AppCompatActivity {
 
         Intent rezultat = new Intent();
         Bundle bundle = new Bundle();
-        bundle.putSerializable("banca", b);
+        bundle.putParcelable("banca",b);
 
         rezultat.putExtras(bundle);
         setResult(RESULT_OK, rezultat);
