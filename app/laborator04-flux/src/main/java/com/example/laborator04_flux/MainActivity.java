@@ -64,6 +64,9 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.btnAdaugaAI).setOnClickListener(v ->
                 launcher.launch(new Intent(this, AdaugaBancaAI.class)));
 
+        findViewById(R.id.btnGalerie).setOnClickListener(v ->
+                startActivity(new Intent(this, GalerieBanci.class)));
+
         Button btn = findViewById(R.id.btnVizualizare);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
