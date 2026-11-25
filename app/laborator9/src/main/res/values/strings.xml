@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">laborator9</string>
+    <string name="vremea">Vremea</string>
+    <string-array name="perioade">
+        <item>1 zi</item>
+        <item>5 zile</item>
+    </string-array>
+</resources>
